@@ -2,13 +2,14 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
+import { Suspense } from "react";
 
 const EXAMS = [
   { id: "math-g8", subject: "Math", title: "Mathematics Olympiad (Grade 8)", durationMin: 30, negative: -0.25 },
   { id: "sci-g8", subject: "Science", title: "Science Olympiad (Grade 8)", durationMin: 25, negative: 0 },
 ];
 
-export default function SelectOlympiad() {
+function OlympiadContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const selectedClass = searchParams.get("class");
@@ -40,5 +41,13 @@ export default function SelectOlympiad() {
         ))}
       </div>
     </>
+  );
+}
+
+export default function SelectOlympiad() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <OlympiadContent />
+    </Suspense>
   );
 }

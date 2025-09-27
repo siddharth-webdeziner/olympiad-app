@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation"; // Import useRouter for navigation
+import { useRouter } from "next/navigation";
 
 export default function Exam() {
   const router = useRouter(); // Initialize useRouter
@@ -18,10 +18,9 @@ export default function Exam() {
 
   const fetchQuestion = async (index: number) => {
     try {
-      // Fetching question and options from question-json
-      const response = await fetch("json/UK_Question.json");
+      const response = await fetch("json/UK_Question.json"); // Fetch from the public directory
       if (!response.ok) {
-        throw new Error("Failed to fetch question.json");
+        throw new Error("Failed to fetch UK_Question.json");
       }
       const questionJson = await response.json();
       const questionData = questionJson.data.data[index];
