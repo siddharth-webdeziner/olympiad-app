@@ -10,6 +10,8 @@ export default function Exam() {
   const [answers, setAnswers] = useState<string[]>([]); // Array to store selected answers
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [usedQuestions, setUsedQuestions] = useState<Set<number>>(new Set()); // Track used questions
+  const [correctAnswer, setCorrectAnswer] = useState<string>(""); // Store the correct answer
+  const [showDialog, setShowDialog] = useState<boolean>(false); // Control dialog visibility
 
   const fetchQuestion = async (index: number) => {
     try {
@@ -31,6 +33,7 @@ export default function Exam() {
 
       setQuestion(questionData.question);
       setOptions(questionData.options);
+      setCorrectAnswer(questionData.correctAnswer); // Assuming correctAnswer is part of the data
     } catch (error) {
       console.error("Failed to fetch question:", error);
     }
@@ -62,17 +65,22 @@ export default function Exam() {
   const handleNext = () => {
     if (selectedOption) {
       setAnswers((prev) => [...prev, selectedOption]);
-      setSelectedOption(""); // Reset selected option for the next question
-
-      // Find the next unused question index
-      let nextIndex = currentQuestionIndex + 1;
-      while (usedQuestions.has(nextIndex)) {
-        nextIndex++;
-      }
-
-      setUsedQuestions((prev) => new Set(prev).add(nextIndex));
-      setCurrentQuestionIndex(nextIndex);
+      setShowDialog(true); // Show the dialog box
     }
+  };
+
+  const handleContinue = () => {
+    setShowDialog(false); // Hide the dialog box
+    setSelectedOption(""); // Reset selected option for the next question
+
+    // Find the next unused question index
+    let nextIndex = currentQuestionIndex + 1;
+    while (usedQuestions.has(nextIndex)) {
+      nextIndex++;
+    }
+
+    setUsedQuestions((prev) => new Set(prev).add(nextIndex));
+    setCurrentQuestionIndex(nextIndex);
   };
 
   return (
@@ -104,17 +112,25 @@ export default function Exam() {
             className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
             onClick={handleNext}
           >
-            Save
-          </button>
-          <button
-            type="button"
-            className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600"
-            onClick={handleNext}
-          >
             Next
           </button>
         </div>
       </form>
+
+      {showDialog && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded shadow-lg text-center">
+            <h3 className="text-lg font-bold mb-4">Correct Answer</h3>
+            <p className="mb-4">{correctAnswer}</p>
+            <button
+              className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+              onClick={handleContinue}
+            >
+              Continue
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
