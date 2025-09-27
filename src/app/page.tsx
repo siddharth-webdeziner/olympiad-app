@@ -11,7 +11,14 @@ export default function Home() {
     <>
       <h1 className="title">Welcome 👋</h1>
       <p className="subtitle">Pick an olympiad and get started.</p>
-      <div className="grid sm-2">
+      
+      <div className="center">
+        <Link href="/select-class" className="btn primary">
+          Start Quiz
+        </Link>
+      </div>
+      
+      {/* <div className="grid sm-2">
       {EXAMS.map((ex) => (
       <div key={ex.id} className="card">
       <div className="cardHeader">
@@ -26,7 +33,7 @@ export default function Home() {
       </div>
       </div>
       ))}
-      </div>
+      </div> */}
     </>
   );
 }

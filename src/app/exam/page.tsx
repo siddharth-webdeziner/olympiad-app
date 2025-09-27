@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation"; // Import useRouter for navigation
 
 export default function Exam() {
+  const router = useRouter(); // Initialize useRouter
   const [question, setQuestion] = useState("");
   const [options, setOptions] = useState<string[]>([]);
   const [selectedOption, setSelectedOption] = useState<string>("");
@@ -12,6 +14,7 @@ export default function Exam() {
   const [usedQuestions, setUsedQuestions] = useState<Set<number>>(new Set()); // Track used questions
   const [correctAnswer, setCorrectAnswer] = useState<string>(""); // Store the correct answer
   const [showDialog, setShowDialog] = useState<boolean>(false); // Control dialog visibility
+  const [showExitDialog, setShowExitDialog] = useState<boolean>(false); // Control exit dialog visibility
 
   const fetchQuestion = async (index: number) => {
     try {
@@ -83,10 +86,30 @@ export default function Exam() {
     setCurrentQuestionIndex(nextIndex);
   };
 
+  const handleExit = () => {
+    setShowExitDialog(true); // Show the exit confirmation dialog
+  };
+
+  const confirmExit = () => {
+    router.push("/"); // Redirect to the home page
+  };
+
+  const cancelExit = () => {
+    setShowExitDialog(false); // Hide the exit confirmation dialog
+  };
+
   return (
     <div className="card">
-      <div className="text-right text-lg font-bold mb-4">
-        Time Left: {formatTime(timeLeft)}
+      <div className="flex justify-between items-center mb-4">
+        <div className="text-left text-lg font-bold">
+          Time Left: {formatTime(timeLeft)}
+        </div>
+        <button
+          className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+          onClick={handleExit}
+        >
+          Exit
+        </button>
       </div>
       <h2 className="text-xl font-bold mb-4">Exam Page</h2>
       <p className="mb-4">{question}</p>
@@ -128,6 +151,28 @@ export default function Exam() {
             >
               Continue
             </button>
+          </div>
+        </div>
+      )}
+
+      {showExitDialog && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded shadow-lg text-center">
+            <h3 className="text-lg font-bold mb-4">Are you sure you want to quit?</h3>
+            <div className="flex justify-center gap-4">
+              <button
+                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                onClick={confirmExit}
+              >
+                Yes
+              </button>
+              <button
+                className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+                onClick={cancelExit}
+              >
+                No
+              </button>
+            </div>
           </div>
         </div>
       )}
