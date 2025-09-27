@@ -16,7 +16,7 @@ export default function Exam() {
   const fetchQuestion = async (index: number) => {
     try {
       // Fetching question and options from question-json
-      const response = await fetch("question-json/UK_Question.json");
+      const response = await fetch("json/UK_Question.json");
       if (!response.ok) {
         throw new Error("Failed to fetch question.json");
       }
