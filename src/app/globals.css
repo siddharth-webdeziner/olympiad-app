@@ -14,32 +14,32 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #fff;
+    --foreground: #333;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
 :root{
-  --bg:#0b1020;          /* deep indigo */
+  --bg:#fff;          /* deep indigo */
   --card:#0f172a;        /* slate-900 */
   --muted:#94a3b8;       /* slate-400 */
-  --text:#e2e8f0;        /* slate-200 */
+  --text:#333;        /* slate-200 */
   --primary:#0ea5e9;     /* sky-500 */
   --primary-2:#22d3ee;   /* cyan-400 */
   --accent:#f59e0b;      /* amber-500 */
   --danger:#ef4444;      /* red-500 */
   --success:#22c55e;     /* green-500 */
 }
-*{box-sizing:border-box}
+*{box-sizing:border-box;font-weight: 600;}
 html,body{height:100%}
 body{
-  margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+  margin:0; font-family:'Roboto', system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
   background: radial-gradient(1200px 800px at 80% -10%, #0b2345 0%, var(--bg) 40%, #050814 100%);
   color:var(--text);
 }
@@ -47,7 +47,7 @@ body{
 .app{max-width:920px;margin:0 auto;display:flex;flex-direction:column;min-height:100dvh}
 header{
   position:sticky;top:0;z-index:30;backdrop-filter:saturate(140%) blur(10px);
-  background:rgba(2,6,23,.6);border-bottom:1px solid rgba(255,255,255,.06)
+  background:transparent;border-bottom:1px solid rgba(255,255,255,.06)
 }
 .nav{display:flex;align-items:center;gap:.75rem;padding:.8rem 1rem}
 .brand{display:flex;align-items:center;gap:.6rem;font-weight:700;letter-spacing:.2px}
@@ -78,9 +78,9 @@ main{flex:1;padding:1rem}
 .btn:disabled{opacity:.6;cursor:not-allowed}
 
 .row{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
-.muted{color:var(--muted)}
+.muted{color:var(--card)}
 .title{font-size:1.4rem;margin:.2rem 0 .4rem}
-.subtitle{font-size:.95rem;color:var(--muted);margin:.2rem 0 .6rem}
+.subtitle{font-size:.95rem;color:var(--card);margin:.2rem 0 .6rem}
 
 input, select, textarea{
   width:100%;padding:.8rem .9rem;background:rgba(148,163,184,.12);border:1px solid rgba(255,255,255,.08);border-radius:14px;color:var(--text)

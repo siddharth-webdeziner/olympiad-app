@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
+import Image from "next/image";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,12 +26,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link href="https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&display=swap" rel="stylesheet" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <header>
-          <nav className="nav">
-            <div className="brand"><span className="logo">Ω</span> Olympiad App</div>
+          <nav className="nav !px-2 !py-0">
+            <div className="brand">
+              <Image src="/thinkathon_icons/thinkathon_icon_logo.png" alt="Thinkathon logo" width={80} height={80} />
+            </div>
             <div className="spacer" />
             <Link href="/">Home</Link>
             <Link href="/profile">Profile</Link>
