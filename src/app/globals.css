@@ -85,7 +85,7 @@ main{flex:1;padding:1rem}
 input, select, textarea{
   width:100%;padding:.8rem .9rem;background:rgba(148,163,184,.12);border:1px solid rgba(255,255,255,.08);border-radius:14px;color:var(--text)
 }
-label{display:block;font-size:.9rem;margin:.2rem 0 .35rem;color:#cbd5e1}
+label{display:block;font-size:.9rem;margin:.2rem 0 .35rem;color:#333}
 
 /* Question list pills */
 .qList{display:grid;grid-template-columns:repeat(8,1fr);gap:.5rem}

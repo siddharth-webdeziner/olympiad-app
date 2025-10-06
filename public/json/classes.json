@@ -1,15 +1,14 @@
 [
-    { "id": 1, "label": "Class 1", "value": "1" },
-    { "id": 2, "label": "Class 2", "value": "2" },
-    { "id": 3, "label": "Class 3", "value": "3" },
-    { "id": 4, "label": "Class 4", "value": "4" },
-    { "id": 5, "label": "Class 5", "value": "5" },
-    { "id": 6, "label": "Class 6", "value": "6" },
-    { "id": 7, "label": "Class 7", "value": "7" },
-    { "id": 8, "label": "Class 8", "value": "8" },
-    { "id": 9, "label": "Class 9", "value": "9" },
-    { "id": 10, "label": "Class 10", "value": "10" },
-    { "id": 11, "label": "Class 11", "value": "11" },
-    { "id": 12, "label": "Class 12", "value": "12" }
-  ]
-  
+  { "id": 1, "label": "Class 1", "value": "1" },
+  { "id": 2, "label": "Class 2", "value": "2" },
+  { "id": 3, "label": "Class 3", "value": "3" },
+  { "id": 4, "label": "Class 4", "value": "4" },
+  { "id": 5, "label": "Class 5", "value": "5" },
+  { "id": 6, "label": "Class 6", "value": "6" },
+  { "id": 7, "label": "Class 7", "value": "7" },
+  { "id": 8, "label": "Class 8", "value": "8" },
+  { "id": 9, "label": "Class 9", "value": "9" },
+  { "id": 10, "label": "Class 10", "value": "10" },
+  { "id": 11, "label": "Class 11", "value": "11" },
+  { "id": 12, "label": "Class 12", "value": "12" }
+]

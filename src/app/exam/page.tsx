@@ -8,11 +8,12 @@ export default function Exam() {
   const [question, setQuestion] = useState("");
   const [options, setOptions] = useState<string[]>([]);
   const [selectedOption, setSelectedOption] = useState<string>("");
+  const [selectedOptionIndex, setSelectedOptionIndex] = useState<number | null>(null); // Store the index of the selected option
   const [timeLeft, setTimeLeft] = useState<number>(120); // 2 minutes in seconds
   const [answers, setAnswers] = useState<string[]>([]); // Array to store selected answers
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [usedQuestions, setUsedQuestions] = useState<Set<number>>(new Set()); // Track used questions
-  const [correctAnswer, setCorrectAnswer] = useState<string>(""); // Store the correct answer
+  const [correctAnswer, setCorrectAnswer] = useState<number>(0); // Store the correct answer
   const [showDialog, setShowDialog] = useState<boolean>(false); // Control dialog visibility
   const [showExitDialog, setShowExitDialog] = useState<boolean>(false); // Control exit dialog visibility
 
@@ -35,11 +36,28 @@ export default function Exam() {
 
       setQuestion(questionData.question);
       setOptions(questionData.options);
-      setCorrectAnswer(questionData.correctAnswer); // Assuming correctAnswer is part of the data
+      getCorrectAnswer(questionData.correct_Answer);
     } catch (error) {
       console.error("Failed to fetch question:", error);
     }
   };
+
+  const getCorrectAnswer = (correctAnswer: string) => {
+    console.log(correctAnswer);
+    if (correctAnswer === "A") {
+      setCorrectAnswer(1);
+    } else if (correctAnswer === "B") {
+      setCorrectAnswer(2);
+    } else if (correctAnswer === "C") {
+      setCorrectAnswer(3);
+    } else if (correctAnswer === "D") {
+      setCorrectAnswer(4);
+    }
+
+    // This function can be used to get the correct answer for a given question index
+    // For simplicity, we assume the correct answer is part of the question data
+    // return correctAnswer;
+  }
 
   useEffect(() => {
     fetchQuestion(currentQuestionIndex);
@@ -60,13 +78,20 @@ export default function Exam() {
     return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
   };
 
-  const handleOptionChange = (option: string) => {
+  const handleOptionChange = (option: string,index:number) => {
     setSelectedOption(option);
+    setSelectedOptionIndex(index + 1); // Store the index of the selected option (1-based)
   };
 
   const handleNext = () => {
     if (selectedOption) {
+      console.log("Selected Option:", selectedOptionIndex, correctAnswer);
       setAnswers((prev) => [...prev, selectedOption]);
+      if(selectedOptionIndex === correctAnswer){
+        console.log("Correct Answer");
+      } else {
+        console.log("Wrong Answer");
+      }
       setShowDialog(true); // Show the dialog box
     }
   };
@@ -121,7 +146,7 @@ export default function Exam() {
                 name="options"
                 value={option}
                 checked={selectedOption === option}
-                onChange={() => handleOptionChange(option)}
+                onChange={() => handleOptionChange(option, index)}
                 className="mr-2 !w-auto"
               />
               {option}
